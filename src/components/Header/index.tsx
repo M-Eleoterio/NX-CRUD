@@ -4,7 +4,7 @@ import { Button, Container, Navbar } from "react-bootstrap";
 export const Header = () => {
   return (
     <Navbar bg="primary" variant="dark" className="mb-4">
-      <Container fluid className="px-4">
+      <Container>
         <Navbar.Brand className="fw-bold">
           <Package size={35} /> NXCrud
         </Navbar.Brand>

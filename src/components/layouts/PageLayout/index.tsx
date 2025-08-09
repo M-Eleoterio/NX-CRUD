@@ -7,9 +7,7 @@ const PageLayout = ({ children }: React.PropsWithChildren) => {
   return (
     <div>
       <Header />
-      <Container fluid className="px-4" style={{ minHeight: "80vh" }}>
-        {children}
-      </Container>
+      <Container style={{ minHeight: "80vh" }}>{children}</Container>
       <Footer />
     </div>
   );
