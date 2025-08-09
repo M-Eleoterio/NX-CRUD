@@ -4,6 +4,7 @@ import { itemsService } from "../services/item.service";
 
 interface IItemContext {
   items: IItem[];
+  findItem: (id: number) => Promise<IItem | undefined>;
   createItem: (item: ICreateItem) => Promise<void>;
   updateItem: (id: number, item: ICreateItem) => Promise<void>;
   removeItem: (id: number) => Promise<void>;
@@ -14,7 +15,26 @@ const ItemContext = createContext<IItemContext | null>(null);
 export const ItemProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [items, setItems] = useState<IItem[]>([]);
+  const [items, setItems] = useState<IItem[]>([
+    {
+      id: Date.now(),
+      name: "Notebook Lenovo",
+      description: "16GB de RAM, SSD de 1TB, Intel i5-1135G7",
+      price: 1234.5,
+      is_active: true,
+    },
+    {
+      id: Date.now(),
+      name: "Notebook Dell",
+      description: "16GB de RAM, SSD de 1TB, Intel i5-1135G7",
+      price: 1350,
+      is_active: true,
+    },
+  ]);
+
+  const findItem = async (id: number) => {
+    return items.find((item) => item.id === id);
+  };
 
   const createItem = async (data: ICreateItem) => {
     const newItem = await itemsService.create(data);
@@ -35,7 +55,9 @@ export const ItemProvider: React.FC<React.PropsWithChildren> = ({
   };
 
   return (
-    <ItemContext.Provider value={{ items, createItem, removeItem, updateItem }}>
+    <ItemContext.Provider
+      value={{ items, createItem, removeItem, updateItem, findItem }}
+    >
       {children}
     </ItemContext.Provider>
   );

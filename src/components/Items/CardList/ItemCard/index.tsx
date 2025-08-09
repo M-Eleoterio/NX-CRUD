@@ -1,5 +1,6 @@
 import { Badge, Card } from "react-bootstrap";
 import { IItem } from "../../../../interfaces/Item";
+import { Masks } from "../../../../utils/masks";
 
 interface ItemCardProps {
   item: IItem;
@@ -19,7 +20,7 @@ export const ItemCard = ({ item }: ItemCardProps) => {
         </Card.Subtitle>
         <Card.Text>{item.description}</Card.Text>
         <Card.Text>
-          <h4>R${item.price.toFixed(2)}</h4>
+          <h4>{Masks.money(item.price)}</h4>
         </Card.Text>
       </Card.Body>
     </Card>
